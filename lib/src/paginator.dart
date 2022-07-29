@@ -178,7 +178,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
         child: Container(
           // padding: const EdgeInsets.all(4.0),
           margin: const EdgeInsets.all(4.0),
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.center,
           decoration: ShapeDecoration(
             shape: widget.buttonShape ?? const CircleBorder(),
             color: widget.buttonUnselectedBackgroundColor,
