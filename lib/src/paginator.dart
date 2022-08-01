@@ -40,6 +40,16 @@ class NumberPaginator extends StatefulWidget {
   /// Defaults to `null`.
   final Color? buttonUnselectedBackgroundColor;
 
+  /// The content button's padding when selected.
+  ///
+  /// Default to `EdgeInsets.all(4.0)`
+  final EdgeInsetsGeometry selectedPadding;
+
+  /// The content button's padding when not selected.
+  ///
+  /// Default to `EdgeInsets.all(4.0)`
+  final EdgeInsetsGeometry unSelectedPadding;
+
   /// The [PaginatorButton]'s text style
   ///
   /// Default to `null`
@@ -57,6 +67,8 @@ class NumberPaginator extends StatefulWidget {
     this.buttonUnselectedForegroundColor,
     this.buttonSelectedBackgroundColor,
     this.buttonUnselectedBackgroundColor,
+    this.selectedPadding = const EdgeInsets.all(4),
+    this.unSelectedPadding = const EdgeInsets.all(4),
     this.buttonTextStyle,
   }) : super(key: key);
 
@@ -88,6 +100,8 @@ class _NumberPaginatorState extends State<NumberPaginator> {
             unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
             selectedBackgroundColor: widget.buttonSelectedBackgroundColor,
             unSelectedBackgroundColor: widget.buttonUnselectedBackgroundColor,
+            selectedPadding: widget.selectedPadding,
+            unSelectedPadding: widget.unSelectedPadding,
           ),
           Expanded(
             child: LayoutBuilder(
@@ -115,6 +129,8 @@ class _NumberPaginatorState extends State<NumberPaginator> {
             unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
             selectedBackgroundColor: widget.buttonSelectedBackgroundColor,
             unSelectedBackgroundColor: widget.buttonUnselectedBackgroundColor,
+            selectedPadding: widget.selectedPadding,
+            unSelectedPadding: widget.unSelectedPadding,
           ),
         ],
       ),
@@ -184,6 +200,8 @@ class _NumberPaginatorState extends State<NumberPaginator> {
         unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
         selectedBackgroundColor: widget.buttonSelectedBackgroundColor,
         unSelectedBackgroundColor: widget.buttonUnselectedBackgroundColor,
+        selectedPadding: widget.selectedPadding,
+        unSelectedPadding: widget.unSelectedPadding,
       );
 
   Widget _buildDots() => AspectRatio(
