@@ -40,6 +40,11 @@ class NumberPaginator extends StatefulWidget {
   /// Defaults to `null`.
   final Color? buttonUnselectedBackgroundColor;
 
+  /// The [PaginatorButton]'s text style
+  ///
+  /// Default to `null`
+  final TextStyle? buttonTextStyle;
+
   /// Creates an instance of [NumberPaginator].
   const NumberPaginator({
     Key? key,
@@ -52,6 +57,7 @@ class NumberPaginator extends StatefulWidget {
     this.buttonUnselectedForegroundColor,
     this.buttonSelectedBackgroundColor,
     this.buttonUnselectedBackgroundColor,
+    this.buttonTextStyle,
   }) : super(key: key);
 
   @override
@@ -172,7 +178,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
   Widget _buildPageButton(int index) => PaginatorButton(
         onPressed: () => _navigateToPage(index),
         selected: _selected(index),
-        child: Text((index + 1).toString()),
+        child: Text((index + 1).toString(), style: widget.buttonTextStyle),
         shape: widget.buttonShape,
         selectedForegroundColor: widget.buttonSelectedForegroundColor,
         unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
