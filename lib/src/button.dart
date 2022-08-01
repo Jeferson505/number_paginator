@@ -27,15 +27,25 @@ class PaginatorButton extends StatelessWidget {
   /// The button's foreground color when not selected.
   final Color? unSelectedforegroundColor;
 
-  /// The content button's padding when selected.
+  /// The button's padding when selected.
   ///
   /// Default to `EdgeInsets.all(4.0)`
   final EdgeInsetsGeometry selectedPadding;
 
-  /// The content button's padding when not selected.
+  /// The button's padding when not selected.
   ///
   /// Default to `EdgeInsets.all(4.0)`
   final EdgeInsetsGeometry unSelectedPadding;
+
+  /// The content button's padding when selected.
+  ///
+  /// Default to `EdgeInsets.all(4.0)`
+  final EdgeInsetsGeometry selectedContentPadding;
+
+  /// The content button's padding when not selected.
+  ///
+  /// Default to `EdgeInsets.all(4.0)`
+  final EdgeInsetsGeometry unSelectedContentPadding;
 
   /// Creates an instance of [PaginatorButton].
   const PaginatorButton({
@@ -50,6 +60,8 @@ class PaginatorButton extends StatelessWidget {
     this.unSelectedforegroundColor,
     this.selectedPadding = const EdgeInsets.all(4),
     this.unSelectedPadding = const EdgeInsets.all(4),
+    this.selectedContentPadding = const EdgeInsets.all(4),
+    this.unSelectedContentPadding = const EdgeInsets.all(4),
   }) : super(key: key);
 
   @override
@@ -64,6 +76,8 @@ class PaginatorButton extends StatelessWidget {
             shape: shape ?? const CircleBorder(),
             backgroundColor: _backgroundColor(context, selected),
             primary: _foregroundColor(context, selected),
+            padding:
+                selected ? selectedContentPadding : unSelectedContentPadding,
           ),
           child: child,
         ),
