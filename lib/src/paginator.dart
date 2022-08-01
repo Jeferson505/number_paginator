@@ -118,22 +118,26 @@ class _NumberPaginatorState extends State<NumberPaginator> {
             unSelectedContentPadding: widget.unSelectedContentPadding,
           ),
           Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                _availableSpots = (constraints.maxWidth / _buttonWidth).floor();
+            child: widget.numberPages > 0
+                ? LayoutBuilder(
+                    builder: (context, constraints) {
+                      _availableSpots =
+                          (constraints.maxWidth / _buttonWidth).floor();
 
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _buildPageButton(0),
-                    if (_firstDotsShouldShow) _buildDots(),
-                    ..._generateButtonList(),
-                    if (_lastDotsShouldShow) _buildDots(),
-                    _buildPageButton(widget.numberPages - 1),
-                  ],
-                );
-              },
-            ),
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _buildPageButton(0),
+                          if (_firstDotsShouldShow) _buildDots(),
+                          ..._generateButtonList(),
+                          if (_lastDotsShouldShow) _buildDots(),
+                          if (widget.numberPages > 1)
+                            _buildPageButton(widget.numberPages - 1),
+                        ],
+                      );
+                    },
+                  )
+                : const SizedBox(),
           ),
           PaginatorButton(
             onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
@@ -195,11 +199,16 @@ class _NumberPaginatorState extends State<NumberPaginator> {
     shownPages -= _lastDotsShouldShow ? 2 : 1;
     shownPages -= _firstDotsShouldShow ? 2 : 1;
 
+    int initialPage = widget.numberPages > 1 ? 1 : 0;
+
     int minValue, maxValue;
-    minValue = max(1, _currentPage - shownPages ~/ 2);
+    minValue = max(initialPage, _currentPage - shownPages ~/ 2);
     maxValue = min(minValue + shownPages, widget.numberPages - 1);
     if (maxValue - minValue < shownPages) {
-      minValue = (maxValue - shownPages).clamp(1, widget.numberPages - 1);
+      minValue = (maxValue - shownPages).clamp(
+        initialPage,
+        widget.numberPages - 1,
+      );
     }
 
     return List.generate(
