@@ -91,8 +91,10 @@ class _NumberPaginatorState extends State<NumberPaginator> {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    _buildPageButton(0),
+                    if (_firstDotsShouldShow) _buildDots(),
                     ..._generateButtonList(),
-                    if (_dotsShouldShow) _buildDots(),
+                    if (_lastDotsShouldShow) _buildDots(),
                     _buildPageButton(widget.numberPages - 1),
                   ],
                 );
@@ -139,22 +141,27 @@ class _NumberPaginatorState extends State<NumberPaginator> {
   }
 
   /// Checks if pages don't fit in available spots and dots have to be shown.
-  bool get _dotsShouldShow =>
+  bool get _lastDotsShouldShow =>
       _availableSpots < widget.numberPages &&
-      _currentPage < widget.numberPages - _availableSpots ~/ 2 - 1;
+      _currentPage < widget.numberPages - _availableSpots ~/ 2;
+
+  bool get _firstDotsShouldShow =>
+      _availableSpots < widget.numberPages &&
+      _currentPage > _availableSpots ~/ 2 - 1;
 
   /// Generates the variable button list which is on the left of the (optional)
   /// dots. The very last page is shown independently of this list.
   List<Widget> _generateButtonList() {
     // if dots shown: available minus one for last page + one for dots
-    var shownPages =
-        _dotsShouldShow ? _availableSpots - 2 : _availableSpots - 1;
+    var shownPages = _availableSpots;
+    shownPages -= _lastDotsShouldShow ? 2 : 1;
+    shownPages -= _firstDotsShouldShow ? 2 : 1;
 
     int minValue, maxValue;
-    minValue = max(0, _currentPage - shownPages ~/ 2);
+    minValue = max(1, _currentPage - shownPages ~/ 2);
     maxValue = min(minValue + shownPages, widget.numberPages - 1);
     if (maxValue - minValue < shownPages) {
-      minValue = (maxValue - shownPages).clamp(0, widget.numberPages - 1);
+      minValue = (maxValue - shownPages).clamp(1, widget.numberPages - 1);
     }
 
     return List.generate(
