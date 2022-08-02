@@ -69,7 +69,7 @@ class NumberPaginator extends StatefulWidget {
   const NumberPaginator({
     Key? key,
     required this.numberPages,
-    this.initialPage = 0,
+    this.initialPage = 1,
     this.onPageChange,
     this.height = 48.0,
     this.buttonShape,
@@ -94,7 +94,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
 
   @override
   void initState() {
-    _currentPage = widget.initialPage;
+    _currentPage = widget.initialPage - 1;
     super.initState();
   }
 
@@ -165,21 +165,21 @@ class _NumberPaginatorState extends State<NumberPaginator> {
     setState(() {
       _currentPage--;
     });
-    widget.onPageChange?.call(_currentPage);
+    widget.onPageChange?.call(_currentPage + 1);
   }
 
   _next() {
     setState(() {
       _currentPage++;
     });
-    widget.onPageChange?.call(_currentPage);
+    widget.onPageChange?.call(_currentPage + 1);
   }
 
   _navigateToPage(int index) {
     setState(() {
       _currentPage = index;
     });
-    widget.onPageChange?.call(index);
+    widget.onPageChange?.call(index + 1);
   }
 
   /// Checks if pages don't fit in available spots and dots have to be shown.
