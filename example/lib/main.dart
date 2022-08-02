@@ -12,7 +12,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final int _numPages = 10;
-  int _currentPage = 0;
+  int _currentPage = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
             Expanded(
               child: Container(
                 color: Theme.of(context).backgroundColor,
-                child: pages[_currentPage],
+                child: pages[_currentPage - 1],
               ),
             ),
             NumberPaginator(
