@@ -49,7 +49,6 @@ class PaginatorButton extends StatelessWidget {
 
   /// Creates an instance of [PaginatorButton].
   const PaginatorButton({
-    Key? key,
     required this.onPressed,
     required this.child,
     this.selected = false,
@@ -62,7 +61,8 @@ class PaginatorButton extends StatelessWidget {
     this.unSelectedPadding = const EdgeInsets.all(4),
     this.selectedContentPadding = const EdgeInsets.all(4),
     this.unSelectedContentPadding = const EdgeInsets.all(4),
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class PaginatorButton extends StatelessWidget {
           style: TextButton.styleFrom(
             shape: shape ?? const CircleBorder(),
             backgroundColor: _backgroundColor(context, selected),
-            primary: _foregroundColor(context, selected),
+            foregroundColor: _foregroundColor(context, selected),
             padding:
                 selected ? selectedContentPadding : unSelectedContentPadding,
           ),

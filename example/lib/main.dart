@@ -4,13 +4,13 @@ import 'package:number_paginator/number_paginator.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   final int _numPages = 10;
   int _currentPage = 1;
 
@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
           children: [
             Expanded(
               child: Container(
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).colorScheme.surface,
                 child: pages[_currentPage - 1],
               ),
             ),

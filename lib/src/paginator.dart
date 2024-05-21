@@ -67,7 +67,6 @@ class NumberPaginator extends StatefulWidget {
 
   /// Creates an instance of [NumberPaginator].
   const NumberPaginator({
-    Key? key,
     required this.numberPages,
     this.initialPage = 1,
     this.onPageChange,
@@ -82,13 +81,14 @@ class NumberPaginator extends StatefulWidget {
     this.selectedContentPadding = const EdgeInsets.all(4),
     this.unSelectedContentPadding = const EdgeInsets.all(4),
     this.buttonTextStyle,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
-  _NumberPaginatorState createState() => _NumberPaginatorState();
+  NumberPaginatorState createState() => NumberPaginatorState();
 }
 
-class _NumberPaginatorState extends State<NumberPaginator> {
+class NumberPaginatorState extends State<NumberPaginator> {
   late int _currentPage;
   int _availableSpots = 0;
 
@@ -106,7 +106,6 @@ class _NumberPaginatorState extends State<NumberPaginator> {
         children: [
           PaginatorButton(
             onPressed: _currentPage > 0 ? _prev : null,
-            child: const Icon(Icons.chevron_left),
             shape: widget.buttonShape,
             selectedForegroundColor: widget.buttonSelectedForegroundColor,
             unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
@@ -116,6 +115,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
             unSelectedPadding: widget.unSelectedPadding,
             selectedContentPadding: widget.selectedContentPadding,
             unSelectedContentPadding: widget.unSelectedContentPadding,
+            child: const Icon(Icons.chevron_left),
           ),
           Expanded(
             child: widget.numberPages > 0
@@ -141,7 +141,6 @@ class _NumberPaginatorState extends State<NumberPaginator> {
           ),
           PaginatorButton(
             onPressed: _currentPage < widget.numberPages - 1 ? _next : null,
-            child: const Icon(Icons.chevron_right),
             shape: widget.buttonShape,
             selectedForegroundColor: widget.buttonSelectedForegroundColor,
             unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
@@ -151,6 +150,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
             unSelectedPadding: widget.unSelectedPadding,
             selectedContentPadding: widget.selectedContentPadding,
             unSelectedContentPadding: widget.unSelectedContentPadding,
+            child: const Icon(Icons.chevron_right),
           ),
         ],
       ),
@@ -219,7 +219,6 @@ class _NumberPaginatorState extends State<NumberPaginator> {
   Widget _buildPageButton(int index) => PaginatorButton(
         onPressed: () => _navigateToPage(index),
         selected: _selected(index),
-        child: Text((index + 1).toString(), style: widget.buttonTextStyle),
         shape: widget.buttonShape,
         selectedForegroundColor: widget.buttonSelectedForegroundColor,
         unSelectedforegroundColor: widget.buttonUnselectedForegroundColor,
@@ -229,6 +228,7 @@ class _NumberPaginatorState extends State<NumberPaginator> {
         unSelectedPadding: widget.unSelectedPadding,
         selectedContentPadding: widget.selectedContentPadding,
         unSelectedContentPadding: widget.unSelectedContentPadding,
+        child: Text((index + 1).toString(), style: widget.buttonTextStyle),
       );
 
   Widget _buildDots() => AspectRatio(
